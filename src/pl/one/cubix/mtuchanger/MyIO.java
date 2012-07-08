@@ -1,3 +1,9 @@
+/**
+ * MTUchanger
+ * Copyright (c) 2012 Jakub "Cubix651" Cisło - http://cubix.one.pl
+ * 
+ * License: X11 (MIT) See README file.
+ */
 package pl.one.cubix.mtuchanger;
 
 import java.io.*;
