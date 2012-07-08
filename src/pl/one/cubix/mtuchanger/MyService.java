@@ -33,7 +33,9 @@ public class MyService extends Service {
             {
                 if(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN) == WifiManager.WIFI_STATE_ENABLED)
                 {
-                	changeMtu(ClientActivity.mtu);
+                	try {
+                		changeMtu(MyIO.ReadInt(openFileInput("MTU_SETTINGS")));
+                	}catch (Exception e){ }
                 }
 
             }
@@ -61,7 +63,9 @@ public class MyService extends Service {
         
         this.registerReceiver(mWifiStateChangedReceiver,new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
         myToast.setDuration(Toast.LENGTH_LONG);
-        myToast.setText("The service has been launched.\nMTU will be changed to " + ClientActivity.mtu);
+        try {
+        	myToast.setText("The service has been launched.\nMTU will be changed to " + MyIO.ReadInt(openFileInput("MTU_SETTINGS")));
+        }catch (Exception e){ }
         myToast.show();
         myToast.setDuration(Toast.LENGTH_SHORT);
     }
