@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 import java.io.*;
 
@@ -27,7 +28,6 @@ public class MyService extends Service {
         
         mWifiStateChangedReceiver = new BroadcastReceiver()
         {
-
             @Override
             public void onReceive(Context context, Intent intent)
             {
@@ -35,7 +35,9 @@ public class MyService extends Service {
                 {
                 	try {
                 		changeMtu(MyIO.ReadInt(openFileInput("MTU_SETTINGS")));
-                	}catch (Exception e){ }
+                	}catch (Exception e){
+                		Log.e("MyService", e.toString());
+                	}
                 }
 
             }
@@ -65,7 +67,9 @@ public class MyService extends Service {
         myToast.setDuration(Toast.LENGTH_LONG);
         try {
         	myToast.setText("The service has been launched.\nMTU will be changed to " + MyIO.ReadInt(openFileInput("MTU_SETTINGS")));
-        }catch (Exception e){ }
+        }catch (Exception e){
+        	Log.e("MyService", e.toString());
+        }
         myToast.show();
         myToast.setDuration(Toast.LENGTH_SHORT);
     }
@@ -97,15 +101,18 @@ public class MyService extends Service {
 				}  
 				else {  
 					// Code to run on unsuccessful  
-					myToast.setText("Error");  
+					myToast.setText("Error");
+					Log.e("MyService", "ChangeMtu unsuccessful");
 				}  
 			} catch (InterruptedException e) {  
 				// Code to run in interrupted exception  
-				myToast.setText("Error");  
+				myToast.setText("Error");
+				Log.e("MyService", e.toString());
 			}  
 		} catch (IOException e) {  
 			// Code to run in input/output exception  
-			myToast.setText("Error");  
+			myToast.setText("Error");
+			Log.e("MyService", e.toString());
 		}  
 		myToast.show();
 	}

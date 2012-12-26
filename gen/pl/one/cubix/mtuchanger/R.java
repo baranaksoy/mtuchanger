@@ -21,8 +21,9 @@ public final class R {
     public static final class id {
         public static final int btnStartService=0x7f080002;
         public static final int btnStopService=0x7f080003;
+        public static final int cbxAutostart=0x7f080005;
         public static final int edtMtuValue=0x7f080001;
-        public static final int menu_settings=0x7f080005;
+        public static final int menu_settings=0x7f080006;
         public static final int tvAuthor=0x7f080004;
         public static final int tvServiceControl=0x7f080000;
     }
@@ -35,6 +36,7 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f050000;
         public static final int author=0x7f050007;
+        public static final int autostart=0x7f050008;
         public static final int description=0x7f050004;
         public static final int hello_world=0x7f050001;
         public static final int menu_settings=0x7f050002;

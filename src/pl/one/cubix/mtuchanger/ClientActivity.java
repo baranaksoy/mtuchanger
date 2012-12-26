@@ -6,18 +6,23 @@
  */
 package pl.one.cubix.mtuchanger;
 
+import java.io.FileNotFoundException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.util.Log;
 
 
 public class ClientActivity extends Activity {
     private Button btnStartService;
     private Button btnStopService;
     private EditText edtMtuValue;
+    private CheckBox cbxAutostart;
     
     private OnClickListener startServiceListener = new OnClickListener() {        
     	@Override
@@ -25,8 +30,8 @@ public class ClientActivity extends Activity {
         	try
         	{
         		int mtu = Integer.parseInt(edtMtuValue.getText().toString());
-        		startService(new Intent(ClientActivity.this, MyService.class));
         		MyIO.WriteInt(openFileOutput("MTU_SETTINGS", 0), mtu);
+        		startService(new Intent(ClientActivity.this, MyService.class));
         	}
         	catch (NumberFormatException nfe)
         	{
@@ -35,6 +40,7 @@ public class ClientActivity extends Activity {
         	catch (Exception e)
         	{
         		Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_LONG).show();
+        		Log.e("ClientAvtivity", e.toString());
         	}
         }
     };
@@ -45,6 +51,7 @@ public class ClientActivity extends Activity {
             stopService(new Intent(ClientActivity.this, MyService.class));
         }
     };
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,10 +63,30 @@ public class ClientActivity extends Activity {
         btnStartService.setOnClickListener(startServiceListener);
         btnStopService.setOnClickListener(stopServiceListener);
         edtMtuValue = (EditText) findViewById(R.id.edtMtuValue);
+        cbxAutostart = (CheckBox) findViewById(R.id.cbxAutostart);
+        
+        cbxAutostart.setOnCheckedChangeListener(new OnCheckedChangeListener()
+        {
+        	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+        	{
+        		Log.d("CheckBox", "Checked:" + isChecked);
+        		try
+        		{
+        			MyIO.WriteBool(getApplicationContext().openFileOutput("AUTOSTART", 3), isChecked);
+        		}
+        		catch (FileNotFoundException fnfe)
+        		{
+        			Log.e("ClientActivity", fnfe.toString());
+        		}
+        	}
+        });
         
         try {
         	edtMtuValue.setText(MyIO.ReadInt(openFileInput("MTU_SETTINGS"))+"");
+        	cbxAutostart.setChecked(MyIO.ReadBool(getApplicationContext().openFileInput("AUTOSTART")));
         }
-        catch (Exception e){ }
+        catch (Exception e){
+        	Log.e("ClientActivity", e.toString());
+        }
     }
 }

@@ -1,10 +1,12 @@
 <manifest package="pl.one.cubix.mtuchanger"
     android:versionCode="1"
-    android:versionName="1.0.1" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
+    
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -22,6 +24,12 @@
 
         <service android:name="MyService" >
         </service>
+        
+        <receiver class=".BootUpReceiver" android:name=".BootUpReceiver">  
+		    <intent-filter>  
+		        <action android:name="android.intent.action.BOOT_COMPLETED" />  
+		    </intent-filter>  
+		</receiver>
     </application>
 
 </manifest>
