@@ -64,5 +64,34 @@ public class MyIO {
 			Log.e("MyIO", e.toString());
 		}
 	}
+	
+	public static String ReadString(FileInputStream fin)
+	{
+		try {
+			InputStreamReader isReader = new InputStreamReader(fin);
+			BufferedReader bReader = new BufferedReader(isReader);
+			String str = bReader.readLine();
+			bReader.close();
+			isReader.close();
+			fin.close();
+			return str;
+		}
+		catch (Exception e) {
+			Log.e("MyIO", e.toString());
+			return null;
+		}
+	}
+	
+	public static void WriteString(FileOutputStream fout, String n)
+	{
+		try {
+			fout.write(n.getBytes());
+			fout.close();
+		}
+		catch (Exception e)
+		{
+			Log.e("MyIO", e.toString());
+		}
+	}
 
 }

@@ -1,12 +1,15 @@
 <manifest package="pl.one.cubix.mtuchanger"
     android:versionCode="1"
-    android:versionName="1.1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.2" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
     
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:icon="@drawable/ic_launcher"

@@ -9,5 +9,7 @@
     <string name="stop">Stop</string>
     <string name="author">Author: Jakub \"Cubix\" Cisło\nhttp://cubix.one.pl</string>
     <string name="autostart">Autostart</string>
+    <string name="interfaceName">Interface name:</string>
+    <string name="checkInterfaceName">Check interface name</string>
 
 </resources>

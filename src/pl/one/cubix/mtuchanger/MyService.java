@@ -34,9 +34,9 @@ public class MyService extends Service {
                 if(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN) == WifiManager.WIFI_STATE_ENABLED)
                 {
                 	try {
-                		changeMtu(MyIO.ReadInt(openFileInput("MTU_SETTINGS")));
+                		changeMtu(MyIO.ReadInt(openFileInput("MTU_SETTINGS")), MyIO.ReadString(openFileInput("INTERFACE_NAME")));
                 	}catch (Exception e){
-                		Log.e("MyService", e.toString());
+                		Log.e("MyServiceOnReceive", e.toString());
                 	}
                 }
 
@@ -68,7 +68,7 @@ public class MyService extends Service {
         try {
         	myToast.setText("The service has been launched.\nMTU will be changed to " + MyIO.ReadInt(openFileInput("MTU_SETTINGS")));
         }catch (Exception e){
-        	Log.e("MyService", e.toString());
+        	Log.e("MyServiceOnStart", e.toString());
         }
         myToast.show();
         myToast.setDuration(Toast.LENGTH_SHORT);
@@ -79,7 +79,7 @@ public class MyService extends Service {
         return null;
     }
     
-    public void changeMtu(int x)
+    public void changeMtu(int x, String interfc)
 	{
 		java.lang.Process p;  
 		try {  
@@ -88,7 +88,7 @@ public class MyService extends Service {
 
 			// Attempt to write a file to a root-only  
 			DataOutputStream os = new DataOutputStream(p.getOutputStream());  
-			os.writeBytes("busybox ifconfig tiwlan0 mtu " + x + "\n");  
+			os.writeBytes("busybox ifconfig " + interfc + " mtu " + x + "\n");  
 
 			// Close the terminal  
 			os.writeBytes("exit\n");  
@@ -102,17 +102,17 @@ public class MyService extends Service {
 				else {  
 					// Code to run on unsuccessful  
 					myToast.setText("Error");
-					Log.e("MyService", "ChangeMtu unsuccessful");
+					Log.e("ChangeMtu", "ChangeMtu unsuccessful");
 				}  
 			} catch (InterruptedException e) {  
 				// Code to run in interrupted exception  
 				myToast.setText("Error");
-				Log.e("MyService", e.toString());
+				Log.e("ChangeMtu", e.toString());
 			}  
 		} catch (IOException e) {  
 			// Code to run in input/output exception  
 			myToast.setText("Error");
-			Log.e("MyService", e.toString());
+			Log.e("ChangeMtu", e.toString());
 		}  
 		myToast.show();
 	}
