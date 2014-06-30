@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:padding="@dimen/padding_medium"
+    android:scrollbars="vertical" >
+    
+	<LinearLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="#000000"
+	    android:orientation="vertical" >
+
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="3dp"
+		    android:text="Interface:"
+		    android:textColor="#FFFFFF" />
+
+		<Spinner
+		    android:id="@+id/interfaceSpinner"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" />
+
+		<TextView
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="3dp"
+		    android:text="MTU:"
+		    android:textColor="#FFFFFF" />
+
+		<EditText
+		    android:id="@+id/mtuEditText"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="2dp"
+		    android:ems="10"
+		    android:inputType="number" >
+
+		    <requestFocus />
+		</EditText>
+
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="3dp"
+	        android:text="Method of changing MTU:"
+	        android:textColor="#FFFFFF" />
+
+	    <Spinner
+	        android:id="@+id/methodSpinner"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" />
+
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="3dp"
+	        android:text="Time of changing MTU:"
+	        android:textColor="#FFFFFF" />
+
+	    <Spinner
+	        android:id="@+id/serviceSpinner"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" />
+
+	    <CheckBox
+	        android:id="@+id/autostartCheckBox"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="3dp"
+	        android:checked="false"
+	        android:text="Autostart"
+	        android:textColor="#FFFFFF" />
+	
+	    <Button
+	        android:id="@+id/saveButton"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginLeft="2dp"
+	        android:layout_marginRight="2dp"
+	        android:text="Save" />
+	
+	</LinearLayout>
+</ScrollView>
